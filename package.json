@@ -1,0 +1,14 @@
+{
+  "name": "mmm-mqttscreenonoff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "MMM-MQTTScreenOnOff.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "5.5.0"
+  }
+}
