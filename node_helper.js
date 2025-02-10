@@ -9,11 +9,7 @@ module.exports = NodeHelper.create({
     },
 
     socketNotificationReceived: function (notification, payload) {
-        if (notification === "SCREEN_ON") {
-            this.turnScreenOn();
-        } else if (notification === "SCREEN_OFF") {
-            this.turnScreenOff();
-        } else if (notification === "CONFIG") {
+        if (notification === "CONFIG") {
             console.log("Received config");
             this.config = payload;
             this.connectToMQTTServer();
@@ -77,6 +73,8 @@ module.exports = NodeHelper.create({
     turnScreenOn: function () {
         console.log("Turning screen on");
 
+		this.sendSocketNotification("SCREEN_ON");
+
         const { screenOnCommand } = this.config;
         exec(screenOnCommand, (error, stdout, stderr) => {
             if (error) {
@@ -89,6 +87,8 @@ module.exports = NodeHelper.create({
 
     turnScreenOff: function () {
         console.log("Turning screen off");
+
+		this.sendSocketNotification("SCREEN_OFF");
 
         const { screenOffCommand } = this.config;
         exec(screenOffCommand, (error, stdout, stderr) => {

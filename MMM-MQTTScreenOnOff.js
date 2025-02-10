@@ -10,11 +10,12 @@ Module.register("MMM-MQTTScreenOnOff", {
         screenOnCommand: "DISPLAY=:0.0 xrandr --output HDMI-1 --auto",
         screenOffCommand: "DISPLAY=:0.0 xrandr --output HDMI-1 --off",
         defaultOffOnStartup: true,
+		broadcastUserPresence: false,
     },
 
     start: function () {
         console.log("Starting MMM-MQTTScreenOnOff module");
-        
+
         this.sendSocketNotification("CONFIG", this.config);
     },
 
@@ -23,4 +24,11 @@ Module.register("MMM-MQTTScreenOnOff", {
         return wrapper;
     },
 
+	socketNotificationReceived: function(notification, payload, sender) {
+		if (this.config.broadcastUserPresence && notification === 'SCREEN_ON') {
+			this.sendNotification("USER_PRESENCE", true);
+		} else if (this.config.broadcastUserPresence && notification === 'SCREEN_OFF') {
+			this.sendNotification("USER_PRESENCE", false);
+		}
+	},
 });
