@@ -9,6 +9,6 @@
   "author": "Olexandr Savchuk <mail@olex.biz>",
   "license": "MIT",
   "dependencies": {
-    "mqtt": "5.10.4"
+    "mqtt": "5.13.1"
   }
 }
